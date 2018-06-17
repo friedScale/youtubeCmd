@@ -1,0 +1,24 @@
+{
+  "name": "youtubecmd",
+  "version": "1.0.0",
+  "description": "serach youtube videos by command and play it with vlc player",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/friedScale/youtubeCmd.git"
+  },
+  "author": "NARI",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/friedScale/youtubeCmd/issues"
+  },
+  "homepage": "https://github.com/friedScale/youtubeCmd#readme",
+  "dependencies": {
+    "commander": "^2.15.1",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2"
+  }
+}
