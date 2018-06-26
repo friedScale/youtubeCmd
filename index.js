@@ -6,23 +6,19 @@ const assert = require("assert"),
 
 const { prompt } = require("inquirer");
 
-
-// function getDataFromAPI(url) {
-//     return req(url);
-// }
-
-// console.log(com.url);
-
-// url = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${myKey}`
-
-// getDataFromAPI(url).then(function(data) {
-//     console.log("youtube search result");
-//     console.log(JSON.parse(data).items.length);
-// })
-
 class Store {
     constructor() {
-        this.apiKey = "AIzaSyAfiSjOZdH8jtOwv0QU-Q8g4Ppz_7YQXxc";
+        this.apiKey = "AIzaSyB8HaRSXDJLeSvHguYo0wy37Oz1xY_rBNg";
+    }
+
+    search(args) {
+        // const type = "video"; //channel | playlist
+        const { type, keyword } = args;
+        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=${type}&q=${keyword}&maxResults=${25}&key=${this.myKey}`;
+        
+        return new Promise(function(resolve, reject) {
+            req(url).then(resolve);
+        });
     }
 
 }
@@ -37,9 +33,13 @@ class Command {
 
 const commFactory = {
     searchCommand: class extends Command {
-        execute() {
-            return Promise.resolve({
-                type: "input", name: "index", message: "the number of video index you want to play"
+        execute(args) {
+            return this.store.search({...args}).then(result => {
+                console.log(result);
+                const list = [];
+                return Promise.resolve({
+                    type: "input", name: "index", message: "the number of video index you want to play"
+                });
             });
         }
     },
@@ -69,9 +69,9 @@ class Invoker {
 
 com
     .version("0.0.1")
-    .command("search")
+    .command("search [keyword]")
     .action(function(keyword, cmd) {
-        Invoker.getCommand("search").execute()
+        Invoker.getCommand("search").execute({ keyword, type: "video" })
                .then(prompt)
                .then(index => {
                     console.log(index);
