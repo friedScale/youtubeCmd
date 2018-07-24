@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/friedScale/youtubeCmd#readme",
   "dependencies": {
+    "columnify": "^1.5.4",
     "commander": "^2.15.1",
     "inquirer": "^6.0.0",
     "request": "^2.87.0",
